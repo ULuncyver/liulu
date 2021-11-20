@@ -28,18 +28,22 @@ $(function() {
         isShowBtn: true, //是否显示左右按钮
         controltop: 10, //控制按钮上下偏移的位置,要将按钮向下移动   首先保证boxh 高度>图片 h
         controlsW: 20, //控制按钮宽度
-        controlsH: 2, //控制按钮高度
+        controlsH: 5, //控制按钮高度
         controlsColor: "#d7d7d7", //普通控制按钮的颜色
-        controlsCurrentColor: "#00ff00", //当前控制按钮的颜色
+        controlsCurrentColor: "#ff6700", //当前控制按钮的颜色
     });
 
     /* 电子书 table切换 */
-    var $lis = $('.ebooks .ebooks-nav > li');
-    $lis.mouseover(function() {
-
+    $('.ebooks-nav > li').mouseenter(function() {
+        //导航高亮颜色切换
+        $(this).addClass('active').siblings('li').removeClass('active');
+        //获取索引
+        var index = $(this).index();
+        //内容切换
+        $('.ebooks-list').eq(index).show().siblings('.ebooks-list').hide();
     })
 
-    /* 新书列表手风琴效果 */
+    /* 电子书列表手风琴效果 */
     $('.ebooks .right-box ul > li').mouseenter(function() {
         // 所有兄弟：隐藏详情 显示标题
         $(this).siblings().find('.desc').hide(); // 隐藏详情
@@ -62,8 +66,20 @@ $(function() {
         controlsW: 20, //控制按钮宽度
         controlsH: 2, //控制按钮高度
         controlsColor: "#d7d7d7", //普通控制按钮的颜色
-        controlsCurrentColor: "#00ff00", //当前控制按钮的颜色
+        controlsCurrentColor: "#ff6700", //当前控制按钮的颜色
     });
+
+
+    /* 服装tab切换 */
+    $('.clothe .clothes-nav li').mouseenter(function() {
+        //导航切换
+        $(this).addClass('active').siblings('li').removeClass('active');
+        //获取索引
+        var index = $(this).index();
+        //内容切换
+        $('.clothe .clothes-content > .clothes-bottom-text').eq(index).show().siblings('.clothes-list').hide();
+    })
+
 
     /* 户外运动电子书小轮播 */
     $('#sport-banner').tyslide({
@@ -76,7 +92,7 @@ $(function() {
         controlsW: 20, //控制按钮宽度
         controlsH: 2, //控制按钮高度
         controlsColor: "#d7d7d7", //普通控制按钮的颜色
-        controlsCurrentColor: "#00ff00", //当前控制按钮的颜色
+        controlsCurrentColor: "#ff6700", //当前控制按钮的颜色
     });
 
 
@@ -91,7 +107,31 @@ $(function() {
         controlsW: 20, //控制按钮宽度
         controlsH: 2, //控制按钮高度
         controlsColor: "#d7d7d7", //普通控制按钮的颜色
-        controlsCurrentColor: "#00ff00", //当前控制按钮的颜色
+        controlsCurrentColor: "#ff6700", //当前控制按钮的颜色
     });
+
+
+
+    /* 推广商品切换 */
+    $('.promotion .promotion-title ul li').mouseenter(function() {
+        // 导航激活类的切换
+        $(this).addClass('active').siblings().removeClass('active')
+
+        // 内容切换
+        // 获取对应的索引
+        var index = $(this).index(); //  0 => left:0 * 1170,   1 => left: -1*-1170
+
+        console.log(index)
+        console.log($('.promotion .promotion-content .inner-box'))
+
+        //左右移动
+        $('.promotion .promotion-content .inner-box').animate({
+            'left': -index * 1170
+        }, 300)
+    })
+
+
+
+
 
 })

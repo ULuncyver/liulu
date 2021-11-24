@@ -70,14 +70,17 @@ $(function() {
     });
 
 
-    /* 服装tab切换 */
-    $('.clothe .clothes-nav li').mouseenter(function() {
-        //导航切换
-        $(this).addClass('active').siblings('li').removeClass('active');
-        //获取索引
-        var index = $(this).index();
-        //内容切换
-        $('.clothe .clothes-content > .clothes-bottom-text').eq(index).show().siblings('.clothes-list').hide();
+    //服装table切换
+    var $lis = $('.clothes .clothes-top-box ul li');
+    $lis.mouseenter(function() {
+        //给自己添加激活类active 把兄弟都干掉
+        $(this).addClass('active').siblings().removeClass('active');
+        //获取index
+        var index = $(this).index;
+        //选中内容
+        var $ebookslist = $('clothes-content');
+        //显示索引等于当前index
+        $ebookslist.eq(index).show().siblings('.content').hide();
     })
 
 
@@ -95,6 +98,18 @@ $(function() {
         controlsCurrentColor: "#ff6700", //当前控制按钮的颜色
     });
 
+    // 户外运动table切换
+    var $lis = $('.sports .top-box ul li');
+    $lis.mouseenter(function() {
+        //给自己添加激活类active 把兄弟都干掉
+        $(this).addClass('active').siblings().removeClass('active');
+        //获取index
+        var index = $(this).index;
+        //选中内容
+        var $ebookslist = $('content');
+        //显示索引等于当前index
+        $ebookslist.eq(index).show().siblings('.content').hide();
+    })
 
     /* 童装电子书小轮播 */
     $('#children-clothes-banner').tyslide({
@@ -110,6 +125,19 @@ $(function() {
         controlsCurrentColor: "#ff6700", //当前控制按钮的颜色
     });
 
+
+    // 童装table切换
+    var $lis = $('.children-clothes .top-box ul li');
+    $lis.mouseenter(function() {
+        //给自己添加激活类active 把兄弟都干掉
+        $(this).addClass('active').siblings().removeClass('active');
+        //获取index
+        var index = $(this).index;
+        //选中内容
+        var $ebookslist = $('content');
+        //显示索引等于当前index
+        $ebookslist.eq(index).show().siblings('.content').hide();
+    })
 
 
     /* 推广商品切换 */
@@ -130,8 +158,43 @@ $(function() {
         }, 300)
     })
 
+    /* 二维码滑出效果 */
+    $('.qr-code .ticket').hover(function() {
+        //让二维码滑出来
+        $('.qr-code div').stop(true).animate({
+            left: '-100px'
+        })
+    }, function() {
+        //让二维码收回去
+        $('.qr-code div').stop(true).animate({
+            left: 0
+        })
+    })
 
+    /* 顶部搜索框交互 */
+    $(document).scroll(function() {
+        //获取到顶部的距离
+        var topDistance = $('html,body').scrollTop();
+        //判断
+        if (topDistance > 500) {
+            //如果滚动距离大于500 滑下来
+            $('.top-search-box').slideDown()
+        } else {
+            //否则 收回去
+            $('.top-search-box').slideUp()
+        }
+    })
 
+    /* 楼梯跳转 */
+    $('.floor li').click(function() {
+        //获取索引
+        var index = $(this).index();
+        //选中每一个板块到顶部的偏移
+        var topOffset = $('.floorBox').eq(index).offset().top;
 
-
+        //让滚动条滚到这个位置
+        $('html,body').animate({
+            scrollTop: topOffset - 50
+        })
+    })
 })

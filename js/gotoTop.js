@@ -18,7 +18,7 @@ $(function() {
         var params = $.extend({}, defaults, options)
 
         //准备结构
-        var $gotoTopHtml = $('<div class="backToTop"><img src="${params.imgUrl}" alt ="" ></div>');
+        var $gotoTopHtml = $(`<div class="backToTop"><img src="${params.imgUrl}" alt ="" ></div>`);
         //写样式定位
         $gotoTopHtml.css({
             width: '30px',
